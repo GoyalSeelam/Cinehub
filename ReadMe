@@ -1,0 +1,49 @@
+# 🎬 Netflix Clone
+
+A full-stack Netflix clone built with **Next.js**, **React**, **TypeScript**, **MongoDB**, **Tailwind CSS**, and **NextAuth**. Dockerized for easy development and deployment.
+
+---
+# please see demo
+    https://drive.google.com/file/d/17Xg2EuuwkJET0b-JTSsEqEmX_b9Bsa42/view?usp=drive_link 
+## 🚀 Features
+
+- 🔐 Authentication with NextAuth (Credentials, Google, GitHub)
+- 🎞 Featured Billboard movie
+- 📂 Filter by Genre (Action, Drama, Comedy, Series)
+- ⭐ Add/Remove from Favorites ("My List")
+- 📱 Fully Responsive UI
+- 🔒 Protected Routes
+- 💬 Movie Info Modal
+- 🐳 Docker support for seamless setup
+
+---
+
+## 🧑‍💻 Tech Stack
+
+- **Frontend:** Next.js, React, TypeScript
+- **Backend:** Next.js API Routes
+- **Auth:** NextAuth.js (OAuth + Credentials)
+- **Database:** MongoDB
+- **Styling:** Tailwind CSS
+- **Containerization:** Docker, Docker Compose
+
+---
+
+## 📂 Folder Structure
+netflix-clone/
+├── components/         # UI components
+├── hooks/              # React hooks
+├── pages/              # Next.js pages (routes)
+│   ├── api/            # API routes (auth, movies)
+├── prisma/             # MongoDB models and DB seed
+├── public/             # Static files
+├── styles/             # Global styles
+├── utils/              # Helper functions
+├── docker-compose.yml
+├── Dockerfile
+└── ...
+
+#Install Dependencies
+npm install
+npm run dev
+

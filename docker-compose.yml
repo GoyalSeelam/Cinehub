@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: netflix-clone-app
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env.docker  # Ensure this .env.docker contains the correct DATABASE_URL for MongoDB
+    depends_on:
+      - mongodb
+    volumes:
+      - .:/app
+    command: npm run dev
+    
+
+  mongodb:
+    image: mongo:latest
+    container_name: netflix-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db  # Named volume to persist MongoDB data
+
+volumes:
+  mongo_data:  # Declare the volume for MongoDB persistence
