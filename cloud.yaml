@@ -15,8 +15,8 @@ version:
       cloud:
         images:
           web:
-            # Pushed by .github/workflows/docker.yml. Replace your-dockerhub-user.
-            source: docker.io/your-dockerhub-user/cinehub:${Git.Version}
+            # Pushed by .github/workflows/docker.yml. Docker Hub repository goyal192419/cinehub.
+            source: docker.io/goyal192419/cinehub:${Git.Version}
             parameter: CloudImageWeb
     build:
       - { ParameterKey: ClusterName,               ParameterValue: '${Cluster.Outputs.Cluster}' }
