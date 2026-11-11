@@ -1,0 +1,28 @@
+# SpaceMade Cloud release manifest. Each vX.Y.Z tag creates catalog version X.Y.Z.
+# "name" must equal the catalog item's name in Cloud.
+catalog-item:
+  name: cinehub
+version:
+  # deploy/fargate.yaml does not change per release, so it is uploaded once to S3
+  # (CloudFormation only accepts S3 template URLs). Replace your-template-bucket.
+  # Bump the "/1/" path only when deploy/fargate.yaml changes.
+  resource_url: https://your-template-bucket.s3.amazonaws.com/cinehub/fargate/1/fargate.yaml
+  version_status: draft
+  resource_params:
+    engine: fargate
+    required_outputs: [Cluster, ListenerArn, VpcId, ServiceSubnets, LoadBalancerSecurityGroup]
+    distribution:
+      cloud:
+        images:
+          web:
+            # Pushed by .github/workflows/docker.yml. Replace your-dockerhub-user.
+            source: docker.io/your-dockerhub-user/cinehub:${Git.Version}
+            parameter: CloudImageWeb
+    build:
+      - { ParameterKey: ClusterName,               ParameterValue: '${Cluster.Outputs.Cluster}' }
+      - { ParameterKey: ListenerArn,               ParameterValue: '${Cluster.Outputs.ListenerArn}' }
+      - { ParameterKey: VpcId,                     ParameterValue: '${Cluster.Outputs.VpcId}' }
+      - { ParameterKey: ServiceSubnets,            ParameterValue: '${Cluster.Outputs.ServiceSubnets}' }
+      - { ParameterKey: LoadBalancerSecurityGroup, ParameterValue: '${Cluster.Outputs.LoadBalancerSecurityGroup}' }
+      - { ParameterKey: Hostname,                  ParameterValue: '${Deployment.hostname}' }
+      - { ParameterKey: NextAuthSecret,            ParameterValue: '${Generator.Hex.64}' }
